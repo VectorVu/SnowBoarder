@@ -294,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.243218, y: 1.0198966, z: -10}
+  m_LocalPosition: {x: -1.7831111, y: 1.0198966, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -344,9 +344,9 @@ GameObject:
   m_Component:
   - component: {fileID: 583894246}
   - component: {fileID: 583894243}
-  - component: {fileID: 583894242}
   - component: {fileID: 583894247}
   - component: {fileID: 583894248}
+  - component: {fileID: 583894242}
   m_Layer: 0
   m_Name: Barry
   m_TagString: Untagged
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8644be0aaca81844a3d8cc953973034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  torqueAmount: 10
 --- !u!50 &583894243
 Rigidbody2D:
   serializedVersion: 4
@@ -380,9 +380,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_LinearDrag: 0.5
+  m_AngularDrag: 15
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -546,7 +546,7 @@ Transform:
   m_GameObject: {fileID: 823004243}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.243218, y: 1.0198966, z: -10}
+  m_LocalPosition: {x: -1.7831111, y: 1.0198966, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1093,7 +1093,7 @@ SurfaceEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 51
   m_Speed: 10
   m_SpeedVariation: 0
   m_ForceScale: 0.1
