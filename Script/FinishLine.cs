@@ -5,11 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class Finish : MonoBehaviour
 {
+    [SerializeField] float delayTime = 0.5f;
+    [SerializeField] ParticleSystem FinishEffect;
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            SceneManager.LoadScene(1);
+            FinishEffect.Play();
+            Invoke("LoadNewScene", delayTime);
         }
+    }
+
+    void LoadNewScene()
+    {
+        SceneManager.LoadScene(1);
     }
 }
