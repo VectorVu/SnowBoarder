@@ -5,10 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float torqueAmount = 3f;
+    [SerializeField] float boostSpeed = 20f;
+    [SerializeField] float normalSpeed = 10f;
     int EffectTime = 2000;
     bool OnEffectTime = false;
     [SerializeField] ParticleSystem HighEffect;
     [SerializeField] ParticleSystem LowEffect;
+
+    SurfaceEffector2D surfaceEffector2D;
 
     Rigidbody2D rd2d;
 
@@ -16,20 +20,39 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rd2d = GetComponent<Rigidbody2D>();
+        surfaceEffector2D = FindObjectOfType<SurfaceEffector2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.LeftArrow)) 
+        RotatePlayer();
+        BoostSpeed();
+    }
+
+    void BoostSpeed() 
+    {
+        if (Input.GetKey(KeyCode.LeftArrow)) 
+        {
+            surfaceEffector2D.speed = boostSpeed;
+        }
+        else 
+        {
+            surfaceEffector2D.speed = normalSpeed;
+        }
+    }
+
+    void RotatePlayer()
+    {
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             rd2d.AddTorque(torqueAmount);
         }
-        else if(Input.GetKey(KeyCode.RightArrow)) 
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
             rd2d.AddTorque(-torqueAmount);
         }
-        if (OnEffectTime) 
+        if (OnEffectTime)
         {
             EffectTime--;
         }
@@ -40,9 +63,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "HighCloud") 
+        if (other.tag == "HighCloud")
         {
             EffectTime = 2000;
             OnEffectTime = true;
@@ -51,7 +74,7 @@ public class PlayerController : MonoBehaviour
             torqueAmount = 10f;
         }
 
-        if (other.tag == "PoisonCloud") 
+        if (other.tag == "PoisonCloud")
         {
             EffectTime = 2000;
             OnEffectTime = true;
