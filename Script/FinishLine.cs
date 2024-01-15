@@ -12,6 +12,7 @@ public class Finish : MonoBehaviour
         if (other.tag == "Player")
         {
             FinishEffect.Play();
+            GetComponent<AudioSource>().Play();
             Invoke("LoadNewScene", delayTime);
         }
     }

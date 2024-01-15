@@ -11,10 +11,14 @@ public class PlayerController : MonoBehaviour
     bool OnEffectTime = false;
     [SerializeField] ParticleSystem HighEffect;
     [SerializeField] ParticleSystem LowEffect;
+    [SerializeField] AudioClip HighSpeedSFX;
+    [SerializeField] AudioClip LowSpeedSFX;
 
     SurfaceEffector2D surfaceEffector2D;
 
     Rigidbody2D rd2d;
+
+    bool enableControll = true;
 
     // Start is called before the first frame update
     void Start()
@@ -26,17 +30,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotatePlayer();
-        BoostSpeed();
+        if (enableControll)
+        {
+            RotatePlayer();
+            BoostSpeed();
+        }
     }
 
-    void BoostSpeed() 
+    public void DisableControl()
     {
-        if (Input.GetKey(KeyCode.LeftArrow)) 
+        enableControll = false;
+    }
+
+    void BoostSpeed()
+    {
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             surfaceEffector2D.speed = boostSpeed;
         }
-        else 
+        else
         {
             surfaceEffector2D.speed = normalSpeed;
         }
@@ -72,6 +84,7 @@ public class PlayerController : MonoBehaviour
             HighEffect.Play();
             LowEffect.Stop();
             torqueAmount = 10f;
+            GetComponent<AudioSource>().PlayOneShot(HighSpeedSFX);
         }
 
         if (other.tag == "PoisonCloud")
@@ -81,6 +94,7 @@ public class PlayerController : MonoBehaviour
             LowEffect.Play();
             HighEffect.Stop();
             torqueAmount = 0.5f;
+            GetComponent<AudioSource>().PlayOneShot(LowSpeedSFX);
         }
     }
 }

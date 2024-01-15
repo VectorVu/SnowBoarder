@@ -7,16 +7,21 @@ public class CrashDetector : MonoBehaviour
 {
     [SerializeField] float delayTime = 0.5f;
     [SerializeField] ParticleSystem CrashEffect;
-    void OnTriggerEnter2D(Collider2D other) 
+
+    bool crashed = false;
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Ground") 
+        if (other.tag == "Ground" && !crashed)
         {
+            crashed = true;
+            FindObjectOfType<PlayerController>().DisableControl();
             CrashEffect.Play();
+            GetComponent<AudioSource>().Play();
             Invoke("ReloadScene", delayTime);
         }
     }
 
-    void ReloadScene() 
+    void ReloadScene()
     {
         SceneManager.LoadScene(0);
     }
